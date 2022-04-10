@@ -1,9 +1,11 @@
-import { Outlet, Link } from "react-router-dom";
-
-const NavBar = () => {
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import React, { Component } from 'react';
+import { Login} from '../screens/login';
+import { Home } from '../screens/home';
+export const NavBar = () => {
   return (
     <>
-      <nav>
+      {/* <nav>
         <ul>
           <li>
             <Link to="/home">Home</Link>
@@ -17,7 +19,14 @@ const NavBar = () => {
         </ul>
       </nav>
 
-      <Outlet />
+      <Outlet /> */}
+
+<Routes>
+        <Route exact path="/" component={Login} />
+        <Route exact path="/home" component={Home} />
+
+      </Routes>
+      <Home/>
     </>
   )
 };

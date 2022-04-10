@@ -1,26 +1,23 @@
 import axios from 'axios';
 import Logo from '../image/UJCLogo2.png';
 import '../styles.css';
-import { Outlet, Link } from "react-router-dom";
+import {useNavigate,useParams } from "react-router-dom";
 
-// import './components/';
 export const Login = props=> {
+  let navigate=useNavigate();
   const onLogingSubmit =()=>{
 console.log("tapped");
-<> 
-<Link to="/home">Home</Link>
-<Outlet />
 
-</>
 axios
-.get("http://localhost:8080/ujc-mensalidade/api/v1/students"
+.get("http://localhost:8080/ujc-mensalidade/api/v1/utilizadores/apj/admin"
 )
 .then(response => {
   console.log("response data",response.data);
- 
+  console.log("response data",response.data['userName']);
+
   // if (response.data.roles[0].role.match(role)) {
   //   http.get('/sellers/users/' + response.data.username).then(response => {
-  //     props.history.push('/sellers/' + response.data.id + '/products');
+      navigate('/home/'+response.data['userName']);
   //   });
 
   // } else {
@@ -65,27 +62,6 @@ axios
       </div>
     </div>
   </div>
-
-//     <div >
-//       <h2>Login</h2>
-//    <form> 
-
-
-//      <p>    
-//         <label>Numero Identificacao</label>
-//         <br></br>
-
-//      <input type='text'></input></p>
-
-//      <p>
-// <label>Senha</label>
-// <br></br>
-//      <input type='password'></input>
-
-//      </p>
-//      <input type='button' value='Submit' onClick={onLogingSubmit}></input>
-//    </form>
-//     </div>
   );
 }
 
