@@ -1,5 +1,5 @@
-const Payments = () => {
-    return <h1>Contact Me</h1>;
-  };
-  
-  export default Payments;
+export const Payments = () => {
+  return <h1>Pagamentos</h1>;
+};
+
+export default Payments;

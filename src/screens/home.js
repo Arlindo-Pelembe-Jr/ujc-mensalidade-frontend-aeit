@@ -1,53 +1,39 @@
 
 import axios from 'axios';
-import { useParams } from "react-router-dom";
+import {useNavigate,useParams,Link } from "react-router-dom";
 
 export const Home = props=> {
   let {userName} =useParams();
-  const onLogingSubmit =()=>{
-console.log("tapped");
-axios
-.get("http://localhost:8080/ujc-mensalidade/api/v1/students"
-)
-.then(response => {
-  console.log("response data",response.data);
-  // if (response.data.roles[0].role.match(role)) {
-  //   http.get('/sellers/users/' + response.data.username).then(response => {
-  //     props.history.push('/sellers/' + response.data.id + '/products');
-  //   });
+  const retrieveStudents = async ()=>{
+    console.log("tapped");
+    
+    const response=axios
+    .get("http://localhost:8080/ujc-mensalidade/api/v1/estudantes"
+    );
 
-  // } else {
-
-  //   props.history.push('/landing');
-  // }
-
-})
-.catch(error => {
-});
-  }
+    return (await response).data
+      };
+  
   return (
 
 
     <div >
-      Hello, Welcome {userName}
-      {/* <h2>Login</h2>
-   <form> 
 
-
-     <p>    
-        <label>Numero Identificacao</label>
-        <br></br>
-
-     <input type='text'></input></p>
-
-     <p>
-<label>Senha</label>
-<br></br>
-     <input type='password'></input>
-
-     </p>
-     <input type='button' value='Submit' onClick={onLogingSubmit}></input>
-   </form> */}
+      <div>
+        <ul>
+          <li>
+            <Link to="/">Login</Link>
+          </li>
+          <li>
+            <Link to="/list_payments">List Payments</Link>
+          </li>
+          <li>
+            <Link to="/payments">Payments</Link>
+          </li>
+        </ul>
+      </div>
+      <h2> Hello, Welcome {userName}</h2>
+     
     </div>
   );
 }

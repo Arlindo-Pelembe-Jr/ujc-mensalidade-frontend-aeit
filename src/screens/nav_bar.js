@@ -19,14 +19,9 @@ export const NavBar = () => {
         </ul>
       </nav>
 
-      <Outlet /> */}
+     */}
 
-<Routes>
-        <Route exact path="/" component={Login} />
-        <Route exact path="/home" component={Home} />
 
-      </Routes>
-      <Home/>
     </>
   )
 };

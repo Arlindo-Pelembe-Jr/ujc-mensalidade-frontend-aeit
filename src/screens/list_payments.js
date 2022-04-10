@@ -1,5 +1,5 @@
-const ListPayments = () => {
-    return <h1>Blog Articles</h1>;
-  };
-  
-  export default ListPayments;
+export const ListPayments = () => {
+  return <h1>Lista de Pagamentos do Estudante</h1>;
+};
+
+export default ListPayments;
