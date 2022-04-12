@@ -55,7 +55,7 @@ axios
           <span className=" login-form-title">Bem vindo!</span>
 
           <span className="login-from-title">
-            <img src={Logo} alt="Universidade Joaquiam Chissano" />
+            <img src={Logo} width={200} alt="Universidade Joaquiam Chissano" />
           </span>
 
           <div className="wrap-input">
