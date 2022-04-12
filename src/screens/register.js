@@ -4,7 +4,7 @@ import '../styles.css';
 import {useNavigate,useParams } from "react-router-dom";
 import { useState, useEffect } from 'react';
 
-export const Login = props=> {
+export const Register = props=> {
   const [userData, setUserData] = useState({
     username: '',
     senha: '',
@@ -15,12 +15,15 @@ export const Login = props=> {
     setUserData({ ...userData, [e.target.name]: e.target.value });
   };
   let navigate=useNavigate();
-  const onSiginClick =()=>{navigate('/register');};
-  const onLogingSubmit =()=>{
+  const onSiginSubmit =()=>{
 console.log("tapped");
 
 axios
-.get("http://localhost:8080/ujc-mensalidade/api/v1/utilizadores/"+userData.username+"/"+userData.senha
+.post("http://localhost:8080/ujc-mensalidade/api/v1/utilizadores/" /*+userData.username+"/"+userData.senha*/,{
+    "nome":userData.name,
+    "senha":userData.senha,
+    "userName":userData.username
+}
 )
 .then(response => {
   console.log("response data",response);
@@ -52,12 +55,15 @@ axios
     <div className="container-login">
       <div className="wrap-login">
         <form className="login-form">
-          <span className=" login-form-title">Bem vindo!</span>
+          <span className=" login-form-title">Registrar !</span>
 
           <span className="login-from-title">
             <img src={Logo} alt="Universidade Joaquiam Chissano" />
           </span>
-
+          <div className="wrap-input">
+            <input className="input" type="text" onChange={setValues} name="name"/>
+            <span className="focus-input" data-placeholder="Name"></span>
+          </div>
           <div className="wrap-input">
             <input className="input" type="text" onChange={setValues} name="username"/>
             <span className="focus-input" data-placeholder="User Name"></span>
@@ -70,14 +76,12 @@ axios
 
           <div className="container-login-form-btn">
           {/* <button className="login-form-btn">Login</button> */}
-          <input type='button' value='Entrar' className="login-form-btn" onClick={onLogingSubmit}></input>
+          <input type='button' value='Criar conta' className="login-form-btn" onClick={onSiginSubmit}></input>
           </div>
-<div className="text-center">
+{/* <div className="text-center">
 <span className="txt1">Nao possui conta?</span>
-{/* <a className="txt2" onClick={ navigate('/register')}>Criar conta.</a> */}
-<input type='button' value='Registrar' className="txt2" onClick={onSiginClick}></input>
-
-</div>
+<a className="txt2" href="#">Criar conta.</a>
+</div> */}
         </form>
       </div>
     </div>
@@ -85,4 +89,4 @@ axios
   );
 }
 
-export default Login;
+export default Register;

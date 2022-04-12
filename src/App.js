@@ -9,6 +9,7 @@ import { ListPayments } from '../src/screens/list_payments';
 import './App.css';
 import './styles.css';
 import ErrorPage from './screens/error_page';
+import { Register } from '../src/screens/register';
 
 function App(){
   return ( <Router>
@@ -17,6 +18,7 @@ function App(){
     <Route exact path="/home/:userName" element={<Home/>}/>
     <Route path="/payments" element={<Payments/>}/>
     <Route path="/list_payments" element={<ListPayments/>}/>
+    <Route path="/register" element={<Register/>}/>
 
     <Route path="*" element={<ErrorPage/>}/>
 
