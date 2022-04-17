@@ -3,7 +3,7 @@ import Logo from '../image/UJCLogo2.png';
 import '../styles.css';
 import {useNavigate,useParams } from "react-router-dom";
 import { useState, useEffect } from 'react';
-
+import 'bootstrap/dist/css/bootstrap.min.css';
 export const Login = props=> {
   const [userData, setUserData] = useState({
     username: '',
@@ -49,38 +49,49 @@ axios
   }
   return (
     <div className="container">
-    <div className="container-login">
-      <div className="wrap-login">
-        <form className="login-form">
-          <span className=" login-form-title">Bem vindo!</span>
+    
+    <form onSubmit={onLogingSubmit}>
 
-          <span className="login-from-title">
-            <img src={Logo} width={200} alt="Universidade Joaquiam Chissano" />
-          </span>
+      {/* <h2>Bem Vindo!</h2>
+    <img src={Logo} width={200} alt="Universidade Joaquiam Chissano"  /> */}
 
-          <div className="wrap-input">
-            <input className="input" type="text" onChange={setValues} name="username"/>
-            <span className="focus-input" data-placeholder="User Name"></span>
-          </div>
 
-          <div className="wrap-input">
-            <input className="input" type="password" onChange={setValues} name="senha"/>
-            <span className="focus-input" data-placeholder="Password "></span>
-          </div>
-
-          <div className="container-login-form-btn">
-          {/* <button className="login-form-btn">Login</button> */}
-          <input type='button' value='Entrar' className="login-form-btn" onClick={onLogingSubmit}></input>
-          </div>
-<div className="text-center">
-<span className="txt1">Nao possui conta?</span>
-{/* <a className="txt2" onClick={ navigate('/register')}>Criar conta.</a> */}
-<input type='button' value='Registrar' className="txt2" onClick={onSiginClick}></input>
+    
+<div class="card" >
+  <div class="card-body" >
+    <h5 class="card-title">Bem Vindo !</h5>
+    {/* <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p> */}
+  </div >
+  <img src={Logo} height={200} width={200} className="card-img-bottom" alt="Universidade Joaquiam Chissano"  />
 
 </div>
-        </form>
-      </div>
-    </div>
+  <div className="mb-3">
+    <label  className="form-label">User Name</label>
+    <input className="form-control" type="text" aria-describedby="userNameHelp" onChange={setValues} name="username"/>
+
+    {/* <div id="userNameHelp" class="form-text">We'll never share your email with anyone else.</div> */}
+  </div>
+  <div className="mb-3">
+    <label for="exampleInputPassword1" class="form-label">Password</label>
+    <input className="form-control" type="password" id="exampleInputPassword1" onChange={setValues} name="senha"/>
+
+  </div>
+  {/* <div class="mb-3 form-check">
+    <input type="checkbox" class="form-check-input" id="exampleCheck1"/>
+    <label class="form-check-label" for="exampleCheck1">Check me out</label>
+  </div> */}
+ 
+</form>
+<div className="d-grid gap-2 col-6 mx-auto">
+
+<button type="submit" className="btn btn-outline-primary" onClick={onLogingSubmit}>Entrar</button>
+<button type="submit" className="btn btn-outline-info" onClick={onSiginClick}>Registrar</button>
+
+</div>
+   
+  
+
   </div>
   );
 }

@@ -3,6 +3,8 @@ import axios from 'axios';
 import {useNavigate,useParams,Link,useLocation } from "react-router-dom";
 import '../estilo.css';
 import React, { useState, useEffect } from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 export const Home = props=> {
   const [listStudents, setlistStudents] = useState([]);
   let {userName} =useParams();
@@ -30,74 +32,67 @@ export const Home = props=> {
 
 
     <div >
-
-      {/* <div>
-        <ul>
-          <li>
-            <Link to="/">Login</Link>
-          </li>
-          <li>
-            <Link to="/list_payments">List Payments</Link>
-          </li>
-          <li>
-            <Link to="/payments">Payments</Link>
-          </li>
-        </ul>
-      </div> */}
-        {/* <div class="cabecalho" id="inicio"> 
-        
-       
-
-    </div> */}
-    <div class="cabecalho" id="inicio"> 
-    <h2 >Sistema De Pagamento de Mensalidade</h2>
-    <h2> 
-      Utilizador: {userName} </h2>
+<nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div className="container-fluid">
+    <a className="navbar-brand" href="#">Sistema De Pagamento de Mensalidade</a>
+    <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+      <span className="navbar-toggler-icon"></span>
+    </button>
+    <div className="collapse navbar-collapse" id="navbarText">
+      <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+        <li className="nav-item">
+        <Link to="#" className="nav-link active" aria-current="page">Home</Link>
+        </li>
+        <li className="nav-item">
+          <Link className="nav-link" to="#">Pagamentos</Link>
+        </li>
+        <li className="nav-item">
+        <Link className="nav-link" to="#">Notas</Link>
+        </li>
+      </ul>
+      <span className="navbar-text">
+      Utilizador: {userName} 
+      </span>
     </div>
-      <div class="menuSis" id="Sismenu"> 
-        <h3>Menu Sistema</h3>
-     <ul class="active"> 
-         <li>
-             {/* <button class="menubtn"><a href="../pages/home_page.php">Mensalidades Pagas</a></button> */}
-             <Link to="/">Login</Link>
-            
-            </li>
-            <li>
-             {/* <button class="menubtn"><a href="../pages/home_page.php">Mensalidades Pagas</a></button> */}
-             <Link to="/">Mensalidades Pagas</Link>
-            
-            </li>
-         <li> 
-         <div class="menu">
-  {/* <button class="menubtn"> <a  href="">Pagamento Mensalidade</a> </button> */}
-  <Link to="/payments">Payments</Link>
-  <div class="menu-content">
-  <Link to="*">M-Pesa</Link>
-  <Link to="*">Banco</Link>
-    {/* <a href="../pages/pagamentos_mpesa.php">M-Pesa</a>
-    <a href="../pages/pagamentos_banco.php">Banco</a> */}
   </div>
-</div>
-        
-            </li>
-         <li> 
-           {/* <button class="menubtn"><a  href="">Relatorio</a></button>  */}
-           <Link to="*">Relatorio</Link>
-           </li>
-         <li>
-            {/* <button class="menubtn"><a href="../pages/logout.php">Sair do Sistema</a></button> */}
-            <Link to="*">Sair do Sistema</Link>
-             </li>
-
-     </ul>
-    </div>
-    {
+</nav>
+ 
+<table className="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Nome</th>
+      <th scope="col">Cod Estudante</th>
+      <th scope="col">Curso</th>
+    </tr>
+  </thead>
+  {
       listStudents
-      .map(e=><div key={e.id} >
+      .map(e=>
+
+        <tbody key={e.id}>
+    
+    <tr key={e.id}>
+      <th scope="row">{e.id}</th>
+      <td>{e.nome}</td>
+      <td>{e.cod_estudante}</td>
+      <td>{e.curso}</td>
+    </tr>
+
+  </tbody>
+        
+        )
+    }
+
+</table>
+    {/* {
+      listStudents
+      .map(e=>
+      <div key={e.id} >
         <h2 onClick={console.log("id:",e.id)}>{e.nome}</h2>
    
         </div>)
-    }
+    } */}
     </div>
   );
 }
