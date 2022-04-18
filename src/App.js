@@ -5,7 +5,7 @@ import { Login} from './screens/login';
 import { Home } from '../src/screens/home';
 import { Payments } from '../src/screens/payments';
 import { ListPayments } from '../src/screens/list_payments';
-
+import {StudentRegister } from '../src/screens/student_register';
 import './App.css';
 import './styles.css';
 import ErrorPage from './screens/error_page';
@@ -19,6 +19,7 @@ function App(){
     <Route path="/payments" element={<Payments/>}/>
     <Route path="/list_payments" element={<ListPayments/>}/>
     <Route path="/register" element={<Register/>}/>
+    <Route path="/studentRegister" element={<StudentRegister/>}/>
 
     <Route path="*" element={<ErrorPage/>}/>
 

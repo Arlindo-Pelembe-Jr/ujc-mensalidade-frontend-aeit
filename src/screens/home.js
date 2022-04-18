@@ -44,11 +44,15 @@ export const Home = props=> {
         <Link to="#" className="nav-link active" aria-current="page">Home</Link>
         </li>
         <li className="nav-item">
-          <Link className="nav-link" to="#">Pagamentos</Link>
+          <Link className="nav-link active" to="#">Pagamentos</Link>
         </li>
         <li className="nav-item">
-        <Link className="nav-link" to="#">Notas</Link>
+        <Link className="nav-link active" to="/studentRegister">Inscricao</Link>
         </li>
+        <li className="nav-item">
+        <Link className="nav-link active" to="#">Notas</Link>
+        </li>
+        
       </ul>
       <span className="navbar-text">
       Utilizador: {userName} 

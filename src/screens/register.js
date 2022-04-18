@@ -10,6 +10,7 @@ export const Register = props=> {
     username: '',
     senha: '',
     name:'',
+    email:'',
   });
   const [error, setError] = useState(null);
   const setValues = e => {
@@ -24,7 +25,8 @@ axios
 .post("http://localhost:8080/ujc-mensalidade/api/v1/utilizadores/" /*+userData.username+"/"+userData.senha*/,{
     "nome":userData.name,
     "senha":userData.senha,
-    "userName":userData.username
+    "userName":userData.username,
+    "email":userData.email
 }
 )
 .then(response => {
@@ -55,43 +57,43 @@ axios
   return (
     <div className="container">
     
-    <form >
-
-      {/* <h2>Bem Vindo!</h2>
-    <img src={Logo} width={200} alt="Universidade Joaquiam Chissano"  /> */}
-
-
+    <br/>
+    <h5 className="" style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center"
+        }}>Bem Vindo !</h5>
+  <div   style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center"
+        }}>
     
-<div class="card" >
-  <div class="card-body" >
-    <h5 class="card-title">Bem Vindo !</h5>
-    {/* <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p> */}
-  </div >
-  <img src={Logo} height={200} width={200} className="card-img-bottom" alt="Universidade Joaquiam Chissano"  />
+  <img src={Logo} height={200} width={200} className="esc-logo slide-top center-block" alt="Universidade Joaquiam Chissano"  />
 
 </div>
-<div className="mb-3">
+    <form className="d-grid gap-2 col-6 mx-auto" onSubmit={onSiginSubmit}>
+    <div className="mb-3">
     <label  className="form-label">Name</label>
-    <input className="form-control" type="text" aria-describedby="userNameHelp" onChange={setValues} name="name"/>
+    <input className="form-control" type="text"  aria-describedby="userNameHelp" onChange={setValues} name="name"/>
+
+  </div>
+
+  <div className="mb-3">
+    <label  className="form-label">User Name</label>
+    <input className="form-control" type="text"  aria-describedby="userNameHelp" onChange={setValues} name="username"/>
 
   </div>
   <div className="mb-3">
-    <label  className="form-label">User Name</label>
-    <input className="form-control" type="text" aria-describedby="userNameHelp" onChange={setValues} name="username"/>
+    <label  className="form-label">Email</label>
+    <input className="form-control" type="email"  aria-describedby="userNameHelp" onChange={setValues} name="email"/>
 
-    {/* <div id="userNameHelp" class="form-text">We'll never share your email with anyone else.</div> */}
   </div>
   <div className="mb-3">
     <label for="exampleInputPassword1" class="form-label">Password</label>
     <input className="form-control" type="password" id="exampleInputPassword1" onChange={setValues} name="senha"/>
 
-  </div>
-  {/* <div class="mb-3 form-check">
-    <input type="checkbox" class="form-check-input" id="exampleCheck1"/>
-    <label class="form-check-label" for="exampleCheck1">Check me out</label>
-  </div> */}
- 
+  </div> 
 </form>
 <div className="d-grid gap-2 col-6 mx-auto">
 
