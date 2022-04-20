@@ -1,6 +1,6 @@
 import axios from 'axios';
 import '../styles.css';
-import {useNavigate,useParams } from "react-router-dom";
+import {useNavigate,useParams,useLocation } from "react-router-dom";
 import { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -9,8 +9,31 @@ export const StudentRegister = props=> {
     // username: '',
     cod_estudante: '',
     name:'',
+    curso_id:''
     // email:'',
   });
+  const [listCurses, setlistCurses] = useState([]);
+  const { state} = useLocation();
+  useEffect(() => {
+    retrieveCurses();
+  },[]);
+
+  const retrieveCurses = async ()=>{
+    console.log("sync");
+    
+    const response= await axios
+    .get("http://localhost:8080/ujc-mensalidade/api/v1/cursos"
+    );
+      // console.log("response students",(await response).data);
+      // console.log("state 1",state);
+      console.log("Curso Response:",response.data);
+      console.log("Curso Response curso codigo:",response.data[0]['curso_codigo']);
+      console.log("Curso Response curso nome:",response.data[0]['nome_curso']);
+
+
+      setlistCurses( await response.data);
+    return  response.data;
+      };
   const [error, setError] = useState(null);
   const setValues = e => {
     e.persist();
@@ -19,13 +42,15 @@ export const StudentRegister = props=> {
   let navigate=useNavigate();
   const onSiginSubmit =()=>{
 console.log("tapped");
+console.log("value:",value)
 
 axios
-.post("http://localhost:8080/ujc-mensalidade/api/v1/estudantes/" /*+userData.username+"/"+userData.senha*/,{
+.post("http://localhost:8080/ujc-mensalidade/api/v1/estudantes",{
     "nome":userData.name,
     "cod_estudante":userData.cod_estudante,
-    // "userName":userData.username,
-    // "email":userData.email
+    "curso":{
+        "curso_codigo":value
+    }
 }
 )
 .then(response => {
@@ -37,13 +62,10 @@ axios
     console.log("response data['username']",response.data['userName']);
     console.log("response data.username",response.data.userName);
     console.log("userData.username",userData.username);
-      // axios.get("http://localhost:8080/ujc-mensalidade/api/v1/estudantes").then(result=>{ 
-        // console.log("result data",result.data);
+  
         navigate('/home/'+localStorage.getItem("username"),{state:{data:["info","info"]}});
 
-        // navigate('/home/'+response.data['userName'],{state:{data:["info","info"],result:result.data}});
-
-      // });
+    
   }else{
     alert("User Name ou Senha Invalidos");
   }
@@ -53,6 +75,17 @@ axios
   console.log(error);
 });
   }
+
+  const getInitialState = () => {
+    const value = 0;
+    return value;
+  };
+
+  const [value, setValue] = useState(getInitialState);
+
+  const handleChange = (e) => {
+    setValue(e.target.value);
+  };
   return (
     <div className="container">
     
@@ -64,6 +97,22 @@ axios
         }}>Registro de Estudante</h5>
  
     <form className="d-grid gap-2 col-6 mx-auto" onSubmit={onSiginSubmit}>
+
+    <div>
+      <select value={value} onChange={handleChange} name="curso_id">
+          {
+              listCurses.map(e=>
+                <option value={e.curso_codigo}>{e.nome_curso}</option>
+
+              )
+          }
+     
+      </select>
+      {/* <p>{`You selected ${value}`}</p> */}
+    </div>
+
+
+
     <div className="mb-3">
     <label  className="form-label">Nome</label>
     <input className="form-control" type="text"  aria-describedby="userNameHelp" onChange={setValues} name="name"/>
@@ -81,7 +130,7 @@ axios
 
   </div> */}
   <div className="mb-3">
-    <label for="exampleInputPassword1" class="form-label">Codigo Estudante</label>
+    <label for="exampleInputPassword1" className="form-label">Codigo Estudante</label>
     <input className="form-control" type="text" id="exampleInputPassword1" onChange={setValues} name="cod_estudante"/>
 
   </div> 
