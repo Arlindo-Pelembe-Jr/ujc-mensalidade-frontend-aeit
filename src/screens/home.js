@@ -16,7 +16,7 @@ export const Home = props=> {
     console.log("sync");
     
     const response= await axios
-    .get("http://localhost:8080/ujc-mensalidade/api/v1/estudantes"
+    .get("http://localhost:8080/ujc-mensalidade/api/v1/estudantes/byCoures"
     );
       // console.log("response students",(await response).data);
       // console.log("state 1",state);

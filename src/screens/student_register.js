@@ -49,21 +49,20 @@ axios
     "nome":userData.name,
     "cod_estudante":userData.cod_estudante,
     "curso":{
-        "curso_codigo":value
+        "cursoCodigo":value
     }
 }
 )
 .then(response => {
   console.log("response data",response);
   if(response.data != ""){
-    localStorage.setItem('username', response.data.userName);
-    localStorage.getItem("username");
+   const saveValue= localStorage.getItem("username");
     console.log("response data",response.data);
     console.log("response data['username']",response.data['userName']);
     console.log("response data.username",response.data.userName);
     console.log("userData.username",userData.username);
   
-        navigate('/home/'+localStorage.getItem("username"),{state:{data:["info","info"]}});
+        navigate('/home/'+saveValue,{state:{data:["info","info"]}});
 
     
   }else{
