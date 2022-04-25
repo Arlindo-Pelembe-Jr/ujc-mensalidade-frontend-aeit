@@ -44,7 +44,7 @@ export const Home = props=> {
         <Link to="#" className="nav-link active" aria-current="page">Home</Link>
         </li>
         <li className="nav-item">
-          <Link className="nav-link active" to="#">Pagamentos</Link>
+          <Link className="nav-link active" to="/payments">Pagamentos</Link>
         </li>
         <li className="nav-item">
         <Link className="nav-link active" to="/studentRegister">Inscricao</Link>
