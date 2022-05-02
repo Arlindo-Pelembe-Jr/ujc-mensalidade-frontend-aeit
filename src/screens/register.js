@@ -1,7 +1,7 @@
 import axios from 'axios';
 import Logo from '../image/UJCLogo2.png';
 import '../styles.css';
-import {useNavigate,useParams } from "react-router-dom";
+import {useNavigate,useParams,useLocation } from "react-router-dom";
 import { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -11,40 +11,76 @@ export const Register = props=> {
     senha: '',
     name:'',
     email:'',
+
+
   });
   const [error, setError] = useState(null);
   const setValues = e => {
     e.persist();
     setUserData({ ...userData, [e.target.name]: e.target.value });
   };
+  const [listCurses, setlistCurses] = useState([]);
+  const { state} = useLocation();
+  useEffect(() => {
+    retrieveCurses();
+  },[]);
+
+  const retrieveCurses = async ()=>{
+    console.log("sync");
+    
+    const response= await axios
+    .get("http://localhost:8080/ujc-mensalidade/api/v1/cursos"
+    );
+      // console.log("response students",(await response).data);
+      // console.log("state 1",state);
+      console.log("Curso Response:",response.data);
+      console.log("Curso Response curso codigo:",response.data[0]['curso_codigo']);
+      console.log("Curso Response curso nome:",response.data[0]['nome_curso']);
+
+
+      setlistCurses( await response.data);
+    return  response.data;
+      };
   let navigate=useNavigate();
   const onSiginSubmit =()=>{
 console.log("tapped");
 
 axios
-.post("http://localhost:8080/ujc-mensalidade/api/v1/utilizadores/" /*+userData.username+"/"+userData.senha*/,{
-    "nome":userData.name,
-    "senha":userData.senha,
-    "userName":userData.username,
-    "email":userData.email
+.post("http://localhost:8080/ujc-mensalidade/api/v1/utilizadores/role",
+{
+  "utilizador":{
+  "nome":userData.name,
+  "senha":userData.senha,
+  "userName":userData.username,
+  "email":userData.email
+},
+"estudante":{
+      "nome":userData.name,
+  "curso":{
+      "cursoCodigo":value
+  }
+},
+"funcionario":{},
+"perfilUtilizador":{
+  "perfil":valueRole
+}
 }
 )
 .then(response => {
   console.log("response data",response);
   if(response.data != ""){
-    localStorage.setItem('username', response.data.userName);
-
+    localStorage.setItem('username', response.data.utilizador.userName);
+    localStorage.setItem('roleUser',response.data.perfilUtilizador.perfil);
+    localStorage.setItem('userId',response.data.utilizador.id);
+    localStorage.setItem('estudanteId',response.data.estudante.id);
+    console.log("set of values","uNa"+response.data.utilizador.userName + " uPr"+response.data.perfilUtilizador.perfil+" uId"+response.data.utilizador.id + "estID"+response.data.estudante.id);
     console.log("response data",response.data);
-    console.log("response data['username']",response.data['userName']);
-    console.log("response data.username",response.data.userName);
-    console.log("userData.username",userData.username);
-      // axios.get("http://localhost:8080/ujc-mensalidade/api/v1/estudantes").then(result=>{ 
-        // console.log("result data",result.data);
-        navigate('/home/'+response.data['userName'],{state:{data:["info","info"]}});
+    console.log("response data['username']",response.data['utilizador']['userName']);
 
-        // navigate('/home/'+response.data['userName'],{state:{data:["info","info"],result:result.data}});
 
-      // });
+        navigate('/home/'+response.data['utilizador']['userName'],{state:{data:["info","info"]}});
+
+
   }else{
     alert("User Name ou Senha Invalidos");
   }
@@ -53,7 +89,28 @@ axios
 .catch(error => {
   console.log(error);
 });
-  }
+  };
+  const getInitialState = () => {
+    const value = 0;
+    return value;
+  };
+
+  const [value, setValue] = useState(getInitialState);
+
+  const handleChange = (e) => {
+    setValue(e.target.value);
+  };
+
+  const getInitialRoleState = () => {
+    const valueRole = "";
+    return valueRole;
+  };
+
+  const [valueRole, setValueRole] = useState(getInitialRoleState);
+
+  const handleChangeRole = (e) => {
+    setValueRole(e.target.value);
+  };
   return (
     <div className="container">
     
@@ -62,7 +119,7 @@ axios
           display: "flex",
           justifyContent: "center",
           alignItems: "center"
-        }}>Bem Vindo !</h5>
+        }}>Bem Vindo AO REGISTRO!</h5>
   <div   style={{
           display: "flex",
           justifyContent: "center",
@@ -94,7 +151,32 @@ axios
     <input className="form-control" type="password" id="exampleInputPassword1" onChange={setValues} name="senha"/>
 
   </div> 
+  <div>
+      <select value={value} onChange={handleChange} name="curso_id">
+     
+              
+
+                {
+              listCurses.map(e=>
+                <option value={e.curso_codigo}>{e.nome_curso}</option>
+
+              )
+          }
+     
+      </select>
+    </div>
+
+    <div>
+      <select value={valueRole} onChange={handleChangeRole} name="perfil">
+      <option value="ADMIN">Administrador</option>
+                <option value="ESTUDANTE">Estudante</option>
+                <option value="FUNCIONARIO">Funcionario</option>
+     
+      </select>
+      {/* <p>{`You selected ${value}`}</p> */}
+    </div>
 </form>
+<br/>
 <div className="d-grid gap-2 col-6 mx-auto">
 
 <button type="submit" className="btn btn-outline-info" onClick={onSiginSubmit}>Criar Conta</button>

@@ -10,17 +10,18 @@ export const Home = props=> {
   let {userName} =useParams();
   const { state} = useLocation();
   useEffect(() => {
+
     retrieveStudents();
   },[]);
   const retrieveStudents = async ()=>{
     console.log("sync");
-    
     const response= await axios
     .get("http://localhost:8080/ujc-mensalidade/api/v1/estudantes/byCoures"
     );
       // console.log("response students",(await response).data);
       // console.log("state 1",state);
       setlistStudents( await response.data);
+
     return  response.data;
       };
       // console.log("state",state);
@@ -55,7 +56,8 @@ export const Home = props=> {
         
       </ul>
       <span className="navbar-text">
-      Utilizador: {userName} 
+      Utilizador: {userName}--Perfil: {localStorage.getItem('roleUser')} 
+      
       </span>
     </div>
   </div>

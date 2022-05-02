@@ -61,7 +61,7 @@ export const Payments = () => {
               "dataPagamento":currDate,
         "status": 0,
         "estudante": {
-          "id": 2,},
+          "id": localStorage.getItem('estudanteId'),},
             },{
               headers: {
                 "Access-Control-Allow-Origin": "*",
@@ -71,6 +71,8 @@ export const Payments = () => {
               }
             })
             .then(responsePayment =>{
+              navigate('/home/'+localStorage.getItem('username'));
+
               console.log(responsePayment);
             })
             .catch(errorPayment=>{
