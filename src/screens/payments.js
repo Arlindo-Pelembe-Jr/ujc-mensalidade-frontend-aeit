@@ -36,7 +36,7 @@ export const Payments = () => {
         setUserData({ ...userData, [e.target.name]: e.target.value });
       };
 
-      const onSiginSubmit =()=>{
+      const onClickPayments =()=>{
         console.log("tapped");
         console.log("value:",value)
         
@@ -52,6 +52,31 @@ export const Payments = () => {
           console.log("response data",response);
           if(response.status == 200){
             console.log("status",response);
+            console.log("send insert/post to core for insert payment");
+            const currDate = new Date().toLocaleDateString();
+
+            axios
+            .post("http://localhost:8080/ujc-mensalidade/api/v1/pagamentos/mensalidade/"+userData.amount,
+            {
+              "dataPagamento":currDate,
+        "status": 0,
+        "estudante": {
+          "id": 2,},
+            },{
+              headers: {
+                "Access-Control-Allow-Origin": "*",
+            'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS',
+            'Access-Control-Allow-Headers': "append,delete,entries,foreach,get,has,keys,set,values,Authorization",
+          
+              }
+            })
+            .then(responsePayment =>{
+              console.log(responsePayment);
+            })
+            .catch(errorPayment=>{
+              console.log(errorPayment);
+            });
+
           //  const saveValue= localStorage.getItem("username");
           //   console.log("response data",response.data);
           //   console.log("response data['username']",response.data['userName']);
@@ -68,6 +93,7 @@ export const Payments = () => {
         })
         .catch(error => {
           console.log(error);
+          console.log("error message occur here");
         });
           };
           
@@ -92,7 +118,7 @@ export const Payments = () => {
           alignItems: "center"
         }}>Pagamento</h5>
  
-    <form className="d-grid gap-2 col-6 mx-auto" onSubmit={onSiginSubmit}>
+    <form className="d-grid gap-2 col-6 mx-auto" onSubmit={onClickPayments}>
 
     {/* <div>
       <select value={value} onChange={handleChange} name="curso_id">
@@ -132,7 +158,7 @@ export const Payments = () => {
 </form>
 <div className="d-grid gap-2 col-6 mx-auto">
 
-<button type="submit" className="btn btn-outline-info" onClick={onSiginSubmit}>Pagar</button>
+<button type="submit" className="btn btn-outline-info" onClick={onClickPayments}>Pagar</button>
 
 </div>
    
