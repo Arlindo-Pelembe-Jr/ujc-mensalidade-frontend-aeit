@@ -61,7 +61,7 @@ axios
           alignItems: "center"
         }}>
     
-  <img src={Logo} height={200} width={200} className="esc-logo slide-top center-block" alt="Universidade Joaquiam Chissano"  />
+  <img src={Logo} height={200} width={200} className="esc-logo slide-top center-block" alt="Universidade Joaquim Chissano"  />
 
 </div>
     <form className="d-grid gap-2 col-6 mx-auto" onSubmit={onLogingSubmit}>

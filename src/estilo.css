@@ -181,3 +181,10 @@ input {
   .menu:hover .menubtn {
 	background-color: #555;
   }  
+
+  #logoujc{
+	  transform: translateX(225%);
+	  margin-top: 20px;
+	  margin-bottom: 10px;
+
+  }

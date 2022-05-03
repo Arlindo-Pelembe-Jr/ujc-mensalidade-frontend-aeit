@@ -3,7 +3,8 @@ import '../styles.css';
 import {useNavigate,useParams,useLocation } from "react-router-dom";
 import { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-
+import Logo from '../image/UJCLogo2.png';
+import '../estilo.css';
 export const Payments = () => {
   const [userData, setUserData] = useState({
   
@@ -113,6 +114,7 @@ export const Payments = () => {
   return (
 <div className="container">
     
+<img id='logoujc' src={Logo} height={200} width={200} className="esc-logo slide-top center-block" alt="Universidade Joaquim Chissano"  />
     <br/>
     <h5 className="" style={{
           display: "flex",
@@ -138,7 +140,7 @@ export const Payments = () => {
 
     <div className="mb-3">
     <label  className="form-label">Numero a ser Debitado</label>
-    <input className="form-control" type="text"  aria-describedby="userNameHelp" onChange={setValues} name="number"/>
+    <input className="form-control" type="number"  aria-describedby="userNameHelp" onChange={setValues} name="number"/>
 
   </div>
 
@@ -154,7 +156,7 @@ export const Payments = () => {
   </div> */}
   <div className="mb-3">
     <label for="exampleInputPassword1" className="form-label">Valor a Pagar</label>
-    <input className="form-control" type="text"  onChange={setValues} name="amount"/>
+    <input className="form-control" type="number"  onChange={setValues} name="amount"/>
 
   </div> 
 </form>

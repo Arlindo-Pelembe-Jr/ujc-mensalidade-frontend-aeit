@@ -130,7 +130,7 @@ axios
   </div> */}
   <div className="mb-3">
     <label for="exampleInputPassword1" className="form-label">Codigo Estudante</label>
-    <input className="form-control" type="text" id="exampleInputPassword1" onChange={setValues} name="cod_estudante"/>
+    <input className="form-control" type="number" id="exampleInputPassword1" onChange={setValues} name="cod_estudante"/>
 
   </div> 
 </form>
