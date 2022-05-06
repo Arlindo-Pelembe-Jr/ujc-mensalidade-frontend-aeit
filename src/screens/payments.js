@@ -42,11 +42,19 @@ export const Payments = () => {
         console.log("value:",value)
         
         axios
-        .post("http://hakela.herokuapp.com/api/make-test-payment",{
+        .post("https://rumuka.studio/api/make-test-payment",{
             "phone":userData.number,
             "amount":userData.amount,
             "reference": "1214235",
             "application": "app"
+        },
+        {
+          headers: {
+            "Access-Control-Allow-Origin": "*",
+        'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS',
+        'Access-Control-Allow-Headers': "append,delete,entries,foreach,get,has,keys,set,values,Authorization",
+      
+          }
         }
         )
         .then(response => {

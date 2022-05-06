@@ -152,6 +152,8 @@ axios
 
   </div> 
   <div>
+  <label for="exampleInputPassword1" class="form-label">Curso</label>
+        <br/>
       <select value={value} onChange={handleChange} name="curso_id">
      
               
@@ -167,6 +169,9 @@ axios
     </div>
 
     <div>
+    <label for="exampleInputPassword1" class="form-label">Perfil</label>
+    <br/>
+
       <select value={valueRole} onChange={handleChangeRole} name="perfil">
       <option value="ADMIN">Administrador</option>
                 <option value="ESTUDANTE">Estudante</option>
