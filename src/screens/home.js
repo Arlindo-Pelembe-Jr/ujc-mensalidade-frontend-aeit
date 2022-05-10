@@ -50,7 +50,7 @@ export const Home = props=> {
           <Link className="nav-link active" to="/payments">Pagamentos</Link>
         </li>
         <li className="nav-item">
-        <Link className="nav-link active" to="#">Inscricao</Link>
+        <Link className="nav-link active" to="/register">Inscricao</Link>
         </li>
         <li className="nav-item">
         <Link className="nav-link active" to="#">Notas</Link>

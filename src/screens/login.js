@@ -80,7 +80,7 @@ axios
 <div className="d-grid gap-2 col-6 mx-auto">
 
 <button type="submit" className="btn btn-outline-primary" onClick={onLogingSubmit}>Entrar</button>
-<button type="submit" className="btn btn-outline-info" onClick={onSiginClick}>Registrar</button>
+{/* <button type="submit" className="btn btn-outline-info" onClick={onSiginClick}>Registrar</button> */}
 
 </div>
   </div>

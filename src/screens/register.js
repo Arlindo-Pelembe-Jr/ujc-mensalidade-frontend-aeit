@@ -76,9 +76,10 @@ axios
     console.log("set of values","uNa"+response.data.utilizador.userName + " uPr"+response.data.perfilUtilizador.perfil+" uId"+response.data.utilizador.id + "estID"+response.data.estudante.id);
     console.log("response data",response.data);
     console.log("response data['username']",response.data['utilizador']['userName']);
+    navigate('/home/'+localStorage.getItem("username"),{state:{data:["info","info"]}});
 
 
-        navigate('/home/'+response.data['utilizador']['userName'],{state:{data:["info","info"]}});
+        // navigate('/home/'+response.data['utilizador']['userName'],{state:{data:["info","info"]}});
 
 
   }else{
