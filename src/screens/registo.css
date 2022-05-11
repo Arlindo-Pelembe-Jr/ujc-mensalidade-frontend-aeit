@@ -3,3 +3,7 @@
     transform: translate(50%, 80%);
 
 }
+#data_nascimento{
+    background-color: white;
+    border-radius: 5px 5px 5px 5px;
+}

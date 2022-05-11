@@ -35,7 +35,7 @@ export const Home = props=> {
 
 
     <div >
-<nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+<nav class="navbar navbar-dark bg-dark">
   <div className="container-fluid">
     <a className="navbar-brand" href="#"> <img src={Logo} height={55} width={55} class="rounded" alt="UJC"></img></a>
     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
