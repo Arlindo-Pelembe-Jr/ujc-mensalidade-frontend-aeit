@@ -4,7 +4,7 @@ import '../styles.css';
 import {useNavigate,useParams,useLocation } from "react-router-dom";
 import { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-
+import http from '../http_common';
 export const Register = props=> {
   const [userData, setUserData] = useState({
     username: '',
@@ -28,7 +28,7 @@ export const Register = props=> {
   const retrieveCurses = async ()=>{
     console.log("sync");
     
-    const response= await axios
+    const response= await http
     .get("http://localhost:8080/ujc-mensalidade/api/v1/cursos"
     );
       // console.log("response students",(await response).data);
@@ -45,14 +45,19 @@ export const Register = props=> {
   const onSiginSubmit =()=>{
 console.log("tapped");
 
-axios
-.post("http://localhost:8080/ujc-mensalidade/api/v1/utilizadores/role",
+http
+.post("/utilizadores/role",
 {
-  "utilizador":{
+"utilizador":{
   "nome":userData.name,
   "senha":userData.senha,
   "userName":userData.username,
-  "email":userData.email
+      "username":userData.username,
+
+  "email":userData.email,
+  "perfilUtilizador":{
+      "perfil":valueRole
+  }
 },
 "estudante":{
       "nome":userData.name,
@@ -69,13 +74,13 @@ axios
 .then(response => {
   console.log("response data",response);
   if(response.data != ""){
-    localStorage.setItem('username', response.data.utilizador.userName);
-    localStorage.setItem('roleUser',response.data.perfilUtilizador.perfil);
-    localStorage.setItem('userId',response.data.utilizador.id);
-    localStorage.setItem('estudanteId',response.data.estudante.id);
-    console.log("set of values","uNa"+response.data.utilizador.userName + " uPr"+response.data.perfilUtilizador.perfil+" uId"+response.data.utilizador.id + "estID"+response.data.estudante.id);
+    // localStorage.setItem('username', response.data.utilizador.username);
+    // localStorage.setItem('roleUser',response.data.perfilUtilizadors.perfil);
+    // localStorage.setItem('userId',response.data.utilizador.id);
+    // localStorage.setItem('estudanteId',response.data.estudante.id);
+    // console.log("set of values","uNa"+response.data.utilizador.userName + " uPr"+response.data.perfilUtilizador.perfil+" uId"+response.data.utilizador.id + "estID"+response.data.estudante.id);
     console.log("response data",response.data);
-    console.log("response data['username']",response.data['utilizador']['userName']);
+    // console.log("response data['username']",response.data['utilizador']['userName']);
     navigate('/home/'+localStorage.getItem("username"),{state:{data:["info","info"]}});
 
 

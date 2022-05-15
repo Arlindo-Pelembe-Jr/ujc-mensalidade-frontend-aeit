@@ -5,7 +5,7 @@ import '../estilo.css';
 import React, { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Logo from '../image/UJCLogo2.png';
-
+import http from '../http_common';
 export const Home = props=> {
   const [listStudents, setlistStudents] = useState([]);
   let {userName} =useParams();
@@ -16,7 +16,7 @@ export const Home = props=> {
   },[]);
   const retrieveStudents = async ()=>{
     console.log("sync");
-    const response= await axios
+    const response= await http
     .get("http://localhost:8080/ujc-mensalidade/api/v1/estudantes/byCoures"
     );
       // console.log("response students",(await response).data);
@@ -35,7 +35,7 @@ export const Home = props=> {
 
 
     <div >
-<nav class="navbar navbar-dark bg-dark">
+<nav className="navbar navbar-expand-lg navbar-dark bg-dark">
   <div className="container-fluid">
     <a className="navbar-brand" href="#"> <img src={Logo} height={55} width={55} class="rounded" alt="UJC"></img></a>
     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
@@ -59,8 +59,8 @@ export const Home = props=> {
       </ul>
       
       <span className="navbar-text">
-      Utilizador: {userName}
-      <br></br>Perfil: {localStorage.getItem('roleUser')} 
+      Utilizador: {localStorage.getItem("username").toUpperCase()}
+      <br></br>Perfil: {localStorage.getItem('perfilUtilizador')} 
       
       </span>
     </div>

@@ -20,20 +20,22 @@ export const Login = props=> {
 console.log("tapped");
 
 axios
-.get("http://localhost:8080/ujc-mensalidade/api/v1/utilizadores/login/"+userData.email+"/"+userData.senha
+.post("http://localhost:8080/api/v1/auth/login?username="+userData.email+"&password="+userData.senha,
 )
 .then(response => {
   console.log("response data",response);
   if(response.data != ""){
-    localStorage.setItem('username', response.data.userName);
-
+    localStorage.setItem('username', response.data.username);
+    localStorage.setItem("validToken",response.data.token);
+    localStorage.setItem("perfilUtilizador",response.data.perfilUtilizadors[0].perfil);
+    localStorage.setItem("utilizadorId",response.data.userId);
     console.log("response data",response.data);
     console.log("response data['username']",response.data['userName']);
     console.log("response data.username",response.data.userName);
     console.log("userData.username",userData.username);
       // axios.get("http://localhost:8080/ujc-mensalidade/api/v1/estudantes").then(result=>{ 
         // console.log("result data",result.data);
-        navigate('/home/'+response.data['userName'],{state:{data:["info","info"]}});
+        navigate('/home/'+response.data['username'],{state:{data:["info","info"]}});
 
         // navigate('/home/'+response.data['userName'],{state:{data:["info","info"],result:result.data}});
 

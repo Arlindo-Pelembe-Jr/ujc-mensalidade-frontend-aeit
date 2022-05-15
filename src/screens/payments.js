@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Logo from '../image/UJCLogo2.png';
 import '../estilo.css';
+import http from '../http_common';
 export const Payments = () => {
   const [userData, setUserData] = useState({
   
@@ -19,7 +20,7 @@ export const Payments = () => {
   const retrieveCurses = async ()=>{
     console.log("sync");
     
-    const response= await axios
+    const response= await http
     .get("http://localhost:8080/ujc-mensalidade/api/v1/cursos"
     );
       // console.log("response students",(await response).data);
@@ -64,13 +65,13 @@ export const Payments = () => {
             console.log("send insert/post to core for insert payment");
             const currDate = new Date().toLocaleDateString();
 
-            axios
+            http
             .post("http://localhost:8080/ujc-mensalidade/api/v1/pagamentos/mensalidade/"+userData.amount,
             {
               "dataPagamento":currDate,
         "status": 0,
         "estudante": {
-          "id": localStorage.getItem('estudanteId'),},
+          "id": localStorage.getItem('utilizadorId'),},
             },{
               headers: {
                 "Access-Control-Allow-Origin": "*",
