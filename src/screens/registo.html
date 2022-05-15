@@ -10,7 +10,9 @@
   <link rel="stylesheet" href="../estilo.css">
   <link rel="stylesheet" href="bootstrap/dist/css/bootstrap.min.css">
 </head>
-<body><nav class="navbar navbar-expand-lg navbar-light bg-light">
+<body>
+ 
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container-fluid">
     <a class="navbar-brand" href="#"> Home</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
@@ -24,15 +26,17 @@
         <li class="nav-item">
           <a class="nav-link" href="#">Pagamentos</a>
         </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Notas
+        <li class="nav-item">
+          <a class="nav-link" href="#">
+          Notas
           </a>
      
    
     </div>
   </div>
 </nav>
+
+<h3>Inscricao de estudante</h3>
 
   <div class="formulario">
     <form class="row g-3 needs-validation" novalidate>
@@ -109,13 +113,26 @@
           <div class="valid-feedback">
             Looks good!
           </div>
+          
+          </div>
           <div class="col-md-4">
-            <label for="validationCustom01" class="form-label">Email</label>
-            <input type="email" class="form-control" id="validationCustom01"  required>
+            <label for="validationCustom02" class="form-label">Email</label>
+            <input type="email" class="form-control" id="validationCustom02"  required>
             <div class="valid-feedback">
               Looks good!
             </div>
-          </div>
+            
+            </div>
+            <div class="col-md-4">
+              <label for="validationCustom04" class="form-label">Curso</label>
+              <select class="form-select" id="validationCustom04" required>
+                <option value="">...</option>
+              
+              </select>
+              <div class="invalid-feedback">
+                Please select a valid state.
+              </div>
+            </div>
 
           
       

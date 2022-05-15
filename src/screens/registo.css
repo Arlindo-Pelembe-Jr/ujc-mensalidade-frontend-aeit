@@ -1,9 +1,16 @@
 .formulario{
     width: 700px;
-    transform: translate(50%, 80%);
+    transform: translate(50%, 10%);
 
 }
 #data_nascimento{
     background-color: white;
     border-radius: 5px 5px 5px 5px;
+}
+h3{
+margin-left: 500px;
+}
+
+#tabela-notas{
+    margin-top: 50px;
 }
