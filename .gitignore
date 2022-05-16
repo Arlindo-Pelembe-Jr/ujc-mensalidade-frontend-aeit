@@ -24,3 +24,5 @@ yarn-error.log*
 .vscode/launch.json
 *.json
 package-lock.json
+src/styles/listarEstudantes.rtl.css
+ujc-mensalidade-frontend-aeit/
