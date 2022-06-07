@@ -11,8 +11,9 @@ export const Register = props=> {
     senha: '',
     name:'',
     email:'',
-
-
+    number:'',
+    dateBorn:'',
+    nationality:'',
   });
   const [error, setError] = useState(null);
   const setValues = e => {
@@ -44,6 +45,7 @@ export const Register = props=> {
   let navigate=useNavigate();
   const onSiginSubmit =()=>{
 console.log("tapped");
+const currDate = new Date().toLocaleDateString();
 
 http
 .post("/utilizadores/role",
@@ -61,11 +63,23 @@ http
 },
 "estudante":{
       "nome":userData.name,
+      "email":userData.email,
+      "contacto":userData.number,
+      "dataNascimento":userData.dateBorn,
+      "dataIngresso":currDate,
+      "nacionalidade":valueNationality,
   "curso":{
       "cursoCodigo":value
   }
 },
-"funcionario":{},
+"funcionario":{
+  "nome":userData.name,
+  "email":userData.email,
+  "contacto":userData.number,
+  "dataNascimento":userData.dateBorn,
+  "dataIngresso":currDate,
+  "nacionalidade":valueNationality,
+},
 "perfilUtilizador":{
   "perfil":valueRole
 }
@@ -114,8 +128,18 @@ http
 
   const [valueRole, setValueRole] = useState(getInitialRoleState);
 
+  const getInitialNationalityState = () => {
+    const valueNationality = "";
+    return valueNationality;
+  };
+  const [valueNationality, setValueNationality] = useState(getInitialNationalityState);
+
+
   const handleChangeRole = (e) => {
     setValueRole(e.target.value);
+  };
+  const handleChangeNationality = (e) => {
+    setValueNationality(e.target.value);
   };
   return (
     <div className="container">
@@ -145,6 +169,26 @@ http
   <div className="mb-3">
     <label  className="form-label">User Name</label>
     <input className="form-control" type="text"  aria-describedby="userNameHelp" onChange={setValues} name="username"/>
+
+  </div>
+  <div>
+    <label for="exampleInputPassword1" class="form-label">Nacionalidade</label>
+    <br/>
+
+      <select value={valueNationality} onChange={handleChangeNationality} name="nationality">
+      <option value="Mocambicana">Mocambicana</option>
+                <option value="Estrangeira">Estrangeira</option>
+      </select>
+      {/* <p>{`You selected ${value}`}</p> */}
+    </div>
+  <div className="mb-3">
+    <label  className="form-label">Data de Nascimento</label>
+    <input className="form-control" type="date"  aria-describedby="userNameHelp" onChange={setValues} name="dateBorn"/>
+
+  </div>
+  <div className="mb-3">
+    <label  className="form-label">Contacto</label>
+    <input className="form-control" type="number"  aria-describedby="userNameHelp" onChange={setValues} name="number"/>
 
   </div>
   <div className="mb-3">
@@ -190,7 +234,7 @@ http
 <br/>
 <div className="d-grid gap-2 col-6 mx-auto">
 
-<button type="submit" className="btn btn-outline-info" onClick={onSiginSubmit}>Criar Conta</button>
+<button type="submit" className="btn btn-outline-info" onClick={onSiginSubmit}>Cadastrar</button>
 
 </div>
    

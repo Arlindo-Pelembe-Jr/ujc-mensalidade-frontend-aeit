@@ -64,10 +64,29 @@ export const ReportPayment = props=> {
     retrieveStudents();
   },[]);
   const retrieveStudents = async ()=>{
-    console.log("sync");
-    const response= await http
-    .get("http://localhost:8080/ujc-mensalidade/api/v1/pagamentos/mouthlyPayment/report/"+localStorage.getItem('utilizadorId')
-    );
+    console.log("sync"); var response;
+    switch (localStorage.getItem('perfilUtilizador')) {
+      case "FUNCIONARIO":
+        response= await http
+        .get("http://localhost:8080/ujc-mensalidade/api/v1/pagamentos"
+        );
+        break;
+        case "ESTUDANTE":
+           response= await http
+          .get("http://localhost:8080/ujc-mensalidade/api/v1/pagamentos/mouthlyPayment/report/"+localStorage.getItem('utilizadorId')
+          );
+          break;
+          case "ADMIN":
+            response= await http
+            .get("http://localhost:8080/ujc-mensalidade/api/v1/pagamentos"
+            );
+        break;
+      default:
+        break;
+    }
+    //  response= await http
+    // .get("http://localhost:8080/ujc-mensalidade/api/v1/pagamentos/mouthlyPayment/report/"+localStorage.getItem('utilizadorId')
+    // );
       // console.log("response students",(await response).data);
       // console.log("state 1",state);
       setlistPayments( await response.data);
@@ -171,7 +190,7 @@ export const ReportPayment = props=> {
 <div className="d-grid gap-2 col-6 mx-auto">
 
 {/* <button type="submit" onClick={btnReport()} className="btn btn-outline-primary" >Imprimir</button> */}
-<Link className="btn btn-outline-primary" to="/iframeReport">Imprimir</Link>
+<Link className="btn btn-outline-primary" to="/iframeReport" target="_blank">Imprimir</Link>
 {/* <iframe src="" width="200%" height="200%"></iframe> */}
 {/* <button type="submit" className="btn btn-outline-info" onClick={onSiginClick}>Registrar</button> */}
 

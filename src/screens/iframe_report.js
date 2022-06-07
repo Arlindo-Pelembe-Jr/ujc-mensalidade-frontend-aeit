@@ -8,7 +8,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 export const IframeReport = props=> {
    
         console.log("sync PDF");
-        const request = new Request(`http://localhost:8080/ujc-mensalidade/api/v1/pagamentos/report/`+localStorage.getItem('utilizadorId'),
+        var request; 
+         request = new Request(`http://localhost:8080/ujc-mensalidade/api/v1/pagamentos/report/`+localStorage.getItem('utilizadorId'),
         {
           method: "GET",
           headers: {
@@ -18,7 +19,46 @@ export const IframeReport = props=> {
           cache: "default",
         }
       );
-
+      switch (localStorage.getItem('perfilUtilizador')) {
+        case "FUNCIONARIO":
+          request = new Request(`http://localhost:8080/ujc-mensalidade/api/v1/pagamentos/report`,
+        {
+          method: "GET",
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('validToken')}`,
+          },
+          mode: "cors",
+          cache: "default",
+        }
+      );
+          break;
+          case "ESTUDANTE":
+            request = new Request(`http://localhost:8080/ujc-mensalidade/api/v1/pagamentos/report/`+localStorage.getItem('utilizadorId'),
+            {
+              method: "GET",
+              headers: {
+                Authorization: `Bearer ${localStorage.getItem('validToken')}`,
+              },
+              mode: "cors",
+              cache: "default",
+            }
+          );
+            break;
+            case "ADMIN":
+              request = new Request(`http://localhost:8080/ujc-mensalidade/api/v1/pagamentos/report`,
+              {
+                method: "GET",
+                headers: {
+                  Authorization: `Bearer ${localStorage.getItem('validToken')}`,
+                },
+                mode: "cors",
+                cache: "default",
+              }
+            );
+          break;
+        default:
+          break;
+      }
       fetch(request)
         .then((response) =>
             response.blob())

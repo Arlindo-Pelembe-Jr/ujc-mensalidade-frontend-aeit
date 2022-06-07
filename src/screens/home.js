@@ -50,7 +50,7 @@ export const Home = props=> {
           <Link className="nav-link active" to="/payments">Pagamentos</Link>
         </li>
         <li className="nav-item">
-        <Link className="nav-link active" to="/register">Inscricao</Link>
+        <Link className="nav-link active" to="/register">Cadastro</Link>
         </li>
         <li className="nav-item">
         <Link className="nav-link active" to="/reportPayment">Relatorios</Link>
@@ -69,44 +69,13 @@ export const Home = props=> {
 
 <div class="tamTab">
 <br></br>
-<h1>Estudantes</h1>
+<h1 align="center">Bem Vindo!</h1>
+<p  align="center">Esta e a plataforma de pagamento de mensalidade da UJC.</p>
  <br></br>
-<table className="table">
-<thead class="table-dark">
-    <tr>
-      <th scope="col">No</th>
-      <th scope="col">Nome</th>
-      <th scope="col">Cod Estudante</th>
-      <th scope="col">Curso</th>
-    </tr>
-  </thead>
-  {
-      listStudents
-      .map(e=>
 
-        <tbody key={e.id}>
-    
-    <tr key={e.id}>
-      <th scope="row">{e.id}</th>
-      <td>{e.nome}</td>
-      <td>{e.cod_estudante}</td>
-      <td>{e.curso}</td>
-    </tr>
 
-  </tbody>
-        
-        )
-    }
+</div>
 
-</table></div>
-    {/* {
-      listStudents
-      .map(e=>
-      <div key={e.id} >
-        <h2 onClick={console.log("id:",e.id)}>{e.nome}</h2>
-   
-        </div>)
-    } */}
     </div>
   );
 }

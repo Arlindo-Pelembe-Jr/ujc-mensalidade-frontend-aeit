@@ -42,26 +42,26 @@ export const Payments = () => {
         console.log("tapped");
         console.log("value:",value)
         
-        axios
-        .post("https://rumuka.studio/api/make-test-payment",{
-            "phone":userData.number,
-            "amount":userData.amount,
-            "reference": "1214235",
-            "application": "app"
-        },
-        {
-          headers: {
-            "Access-Control-Allow-Origin": "*",
-        'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS',
-        'Access-Control-Allow-Headers': "append,delete,entries,foreach,get,has,keys,set,values,Authorization",
+        // axios
+        // .post("https://rumuka.studio/api/make-test-payment",{
+        //     "phone":userData.number,
+        //     "amount":userData.amount,
+        //     "reference": "1214235",
+        //     "application": "app"
+        // },
+        // {
+        //   headers: {
+        //     "Access-Control-Allow-Origin": "*",
+        // 'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS',
+        // 'Access-Control-Allow-Headers': "append,delete,entries,foreach,get,has,keys,set,values,Authorization",
       
-          }
-        }
-        )
-        .then(response => {
-          console.log("response data",response);
-          if(response.status == 200){
-            console.log("status",response);
+        //   }
+        // }
+        // )
+        // .then(response => {
+        //   console.log("response data",response);
+        //   if(response.status == 200){
+            // console.log("status",response);
             console.log("send insert/post to core for insert payment");
             const currDate = new Date().toLocaleDateString();
 
@@ -98,15 +98,15 @@ export const Payments = () => {
                 // navigate('/home/'+saveValue,{state:{data:["info","info"]}});
         
             
-          }else{
-            alert("User Name ou Senha Invalidos");
-          }
+        //   }else{
+        //     alert("User Name ou Senha Invalidos");
+        //   }
           
-        })
-        .catch(error => {
-          console.log(error);
-          console.log("error message occur here");
-        });
+        // })
+        // .catch(error => {
+        //   console.log(error);
+        //   console.log("error message occur here");
+        // });
           };
           
   const getInitialState = () => {
