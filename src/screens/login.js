@@ -46,6 +46,8 @@ axios
   
 })
 .catch(error => {
+  alert("User Name ou Senha Invalidos");
+
   console.log(error);
 });
   }

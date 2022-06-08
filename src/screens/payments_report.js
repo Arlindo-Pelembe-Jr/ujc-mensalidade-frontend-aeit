@@ -7,6 +7,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Logo from '../image/UJCLogo2.png';
 import http from '../http_common';
 export const ReportPayment = props=> {
+  let navigate=useNavigate();
+
     const btnReport =  ()=>{
         console.log("sync PDF");
         const request = new Request(`http://localhost:8080/ujc-mensalidade/api/v1/pagamentos/report`,
@@ -50,11 +52,24 @@ export const ReportPayment = props=> {
         switch(state) {
   
           case 0:   return             ""          ;
-          case 1:   return  <Link className="nav-link active" to="#">Pagar</Link> ;
-          case 2: return  <Link className="nav-link active" to="#">Pagar</Link> ;
+          case 1:   return  <Link className="nav-link active" to="#">Detalhes</Link> ;
+          case 2: return  <Link className="nav-link active" to="#">Detalhes</Link> ;
   
           default:      return <td></td> 
         }
+      };
+
+      const onClickButton = (payment) => {
+        // alert("the payment object line"+payment.id +"--"+payment.status);
+        navigate("/payments",{state:{mode:"edit",data:payment}});
+        // switch(state) {
+  
+        //   case 0:   return             ""          ;
+        //   case 1:   return  <Link className="nav-link active" to="#">Pagar</Link> ;
+        //   case 2: return  <Link className="nav-link active" to="#">Pagar</Link> ;
+  
+        //   default:      return <td></td> 
+        // }
       };
   const [listPayments, setlistPayments] = useState([]);
   let {userName} =useParams();
@@ -147,13 +162,13 @@ export const ReportPayment = props=> {
       <th scope="col">Estado de Pagamento</th>
       <th scope="col">Estudante</th>
       <th scope="col"></th>
-      <th scope="col"></th>
+      {/* <th scope="col"></th> */}
 
     </tr>
   </thead>
   {
       listPayments
-      .map(e=>
+      .map((e,index)=>
 
         <tbody key={e.id}>
     
@@ -167,8 +182,9 @@ export const ReportPayment = props=> {
             <td>{ statePayment(e.status)}</td>
 
                 <td>{e.estudante.nome}</td>
-                <td>{ statePaymentButton(e.status)}</td>
-                <td><Link className="nav-link active" to="#">Detalhes</Link></td>
+                {/* <td>{ statePaymentButton(e.status)}</td> */}
+                {/* <td><Link className="nav-link active" onClick={()=>onClickButton(e)} to="/register">Detalhes</Link></td> */}
+                <td>{e.status ==1 ? <button type="button" className="nav-link active" onClick={()=>onClickButton(e)} >Pagar</button>:<button type="button" className="nav-link active" onClick={()=>onClickButton(e)} >Detalhes</button>}</td>
 
     </tr>
 

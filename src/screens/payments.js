@@ -1,6 +1,6 @@
 import axios from 'axios';
 import '../styles.css';
-import {useNavigate,useParams,useLocation } from "react-router-dom";
+import React,{useNavigate,useParams,useLocation } from "react-router-dom";
 import { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Logo from '../image/UJCLogo2.png';
@@ -12,9 +12,12 @@ export const Payments = () => {
     number:'',
     amount:''
   });
+  const { state} = useLocation();
+
   const [listCurses, setlistCurses] = useState([]);
   useEffect(() => {
     retrieveCurses();
+    // alert("state mode and data"+state.mode+" *"+state.data.estudante.nome);
   },[]);
 
   const retrieveCurses = async ()=>{
@@ -64,14 +67,18 @@ export const Payments = () => {
             // console.log("status",response);
             console.log("send insert/post to core for insert payment");
             const currDate = new Date().toLocaleDateString();
-
-            http
+            switch (state.mode) {
+              case "edit":
+                http
             .post("http://localhost:8080/ujc-mensalidade/api/v1/pagamentos/mensalidade/"+userData.amount,
             {
               "dataPagamento":currDate,
         "status": 0,
+        "id":state.data.id,
         "estudante": {
-          "id": localStorage.getItem('utilizadorId'),},
+          "id":state.data.estudante.id,
+          "utilizador":{"id": state.data.estudante.utilizador.id},        
+        },
             },{
               headers: {
                 "Access-Control-Allow-Origin": "*",
@@ -88,7 +95,58 @@ export const Payments = () => {
             .catch(errorPayment=>{
               console.log(errorPayment);
             });
+                break;
+            
+              default:
+                http
+            .post("http://localhost:8080/ujc-mensalidade/api/v1/pagamentos/mensalidade/"+userData.amount,
+            {
+              "dataPagamento":currDate,
+        "status": 0,
+        "estudante": {
+          "utilizador":{"id": localStorage.getItem('utilizadorId')},},
+            },{
+              headers: {
+                "Access-Control-Allow-Origin": "*",
+            'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS',
+            'Access-Control-Allow-Headers': "append,delete,entries,foreach,get,has,keys,set,values,Authorization",
+          
+              }
+            })
+            .then(responsePayment =>{
+              navigate('/home/'+localStorage.getItem('username'));
 
+              console.log(responsePayment);
+            })
+            .catch(errorPayment=>{
+              console.log(errorPayment);
+            });
+                break;
+            }
+        //     http
+        //     .post("http://localhost:8080/ujc-mensalidade/api/v1/pagamentos/mensalidade/"+userData.amount,
+        //     {
+        //       "dataPagamento":currDate,
+        // "status": 0,
+        // "estudante": {
+        //   "id": localStorage.getItem('utilizadorId'),},
+        //     },{
+        //       headers: {
+        //         "Access-Control-Allow-Origin": "*",
+        //     'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS',
+        //     'Access-Control-Allow-Headers': "append,delete,entries,foreach,get,has,keys,set,values,Authorization",
+          
+        //       }
+        //     })
+        //     .then(responsePayment =>{
+        //       navigate('/home/'+localStorage.getItem('username'));
+
+        //       console.log(responsePayment);
+        //     })
+        //     .catch(errorPayment=>{
+        //       console.log(errorPayment);
+        //     });
+// =====================================================================
           //  const saveValue= localStorage.getItem("username");
           //   console.log("response data",response.data);
           //   console.log("response data['username']",response.data['userName']);
