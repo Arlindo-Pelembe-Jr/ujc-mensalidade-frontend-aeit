@@ -6,38 +6,38 @@ import React, { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Logo from '../image/UJCLogo2.png';
 import http from '../http_common';
-export const ReportPayment = props=> {
+export const NotasScreen = props=> {
   let navigate=useNavigate();
 
-    const btnReport =  ()=>{
-        console.log("sync PDF");
-        const request = new Request(`http://localhost:8080/ujc-mensalidade/api/v1/pagamentos/report`,
-        {
-          method: "GET",
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem('validToken')}`,
-          },
-          mode: "cors",
-          cache: "default",
-        }
-      );
+    // const btnReport =  ()=>{
+    //     console.log("sync PDF");
+    //     const request = new Request(`http://localhost:8080/ujc-mensalidade/api/v1/pagamentos/report`,
+    //     {
+    //       method: "GET",
+    //       headers: {
+    //         Authorization: `Bearer ${localStorage.getItem('validToken')}`,
+    //       },
+    //       mode: "cors",
+    //       cache: "default",
+    //     }
+    //   );
 
-      fetch(request)
-        .then((response) => response.blob())
-        .then((blob) => {              
-          const file = window.URL.createObjectURL(blob);
-          const iframe = document.querySelector("iframe");
-          if (iframe?.src) iframe.src = file;
-        })
-        .catch((err) => {
-          // process error
-        });        //  http
-        // .get("http://localhost:8080/ujc-mensalidade/api/v1/pagamentos/report"
-        // ).then((result)=>{
-        //     console.log(result);
-        // }).catch((error)=>{console.log(error)});
+    //   fetch(request)
+    //     .then((response) => response.blob())
+    //     .then((blob) => {              
+    //       const file = window.URL.createObjectURL(blob);
+    //       const iframe = document.querySelector("iframe");
+    //       if (iframe?.src) iframe.src = file;
+    //     })
+    //     .catch((err) => {
+    //       // process error
+    //     });        //  http
+    //     // .get("http://localhost:8080/ujc-mensalidade/api/v1/pagamentos/report"
+    //     // ).then((result)=>{
+    //     //     console.log(result);
+    //     // }).catch((error)=>{console.log(error)});
   
-          };
+    //       };
     const statePayment = (state) => {
         switch(state) {
   
@@ -71,29 +71,29 @@ export const ReportPayment = props=> {
         //   default:      return <td></td> 
         // }
       };
-  const [listPayments, setlistPayments] = useState([]);
-  let {userName} =useParams();
-  const { state} = useLocation();
+  const [listNotas, setlistNotas] = useState([]);
+//   let {userName} =useParams();
+//   const { state} = useLocation();
   useEffect(() => {
 
-    retrieveStudents();
+    retrieveNotas();
   },[]);
-  const retrieveStudents = async ()=>{
+  const retrieveNotas = async ()=>{
     console.log("sync"); var response;
     switch (localStorage.getItem('perfilUtilizador')) {
       case "FUNCIONARIO":
         response= await http
-        .get("http://localhost:8080/ujc-mensalidade/api/v1/pagamentos"
+        .get("http://localhost:8080/ujc-mensalidade/api/v1/incricoes"
         );
         break;
         case "ESTUDANTE":
            response= await http
-          .get("http://localhost:8080/ujc-mensalidade/api/v1/pagamentos/mouthlyPayment/report/"+localStorage.getItem('utilizadorId')
+          .get("http://localhost:8080/ujc-mensalidade/api/v1/incricoes"
           );
           break;
           case "ADMIN":
             response= await http
-            .get("http://localhost:8080/ujc-mensalidade/api/v1/pagamentos"
+            .get("http://localhost:8080/ujc-mensalidade/api/v1/incricoes"
             );
         break;
       default:
@@ -104,7 +104,7 @@ export const ReportPayment = props=> {
     // );
       // console.log("response students",(await response).data);
       // console.log("state 1",state);
-      setlistPayments( await response.data);
+      setlistNotas( await response.data);
 
     return  response.data;
       };
@@ -136,9 +136,6 @@ export const ReportPayment = props=> {
         <Link className="nav-link active" to="/register">Cadastro</Link>
         </li>} 
         <li className="nav-item">
-        <Link className="nav-link active" to="/notas">Notas</Link>
-        </li>
-        <li className="nav-item">
         <Link className="nav-link active" to="#">Relatorios</Link>
         </li>
        
@@ -155,39 +152,44 @@ export const ReportPayment = props=> {
 
 <div class="tamTab">
 <br></br>
-<h1>Relatorio de Pagamento</h1>
+<h1>Notas</h1>
  <br></br>
 <table className="table">
 <thead class="table-dark">
     <tr>
-      <th scope="col">No</th>
-      <th scope="col">Data de Pagamento</th>
-      <th scope="col">Estado de Pagamento</th>
-      <th scope="col">Estudante</th>
-      <th scope="col"></th>
+    <th>#</th>
+                <th>Data Inscricao</th>
+                <th>Teste 1</th>
+                <th>Teste 2</th>
+                <th>Faltas</th>
+                {/* <th>aproveitamento</th> */}
       {/* <th scope="col"></th> */}
 
     </tr>
   </thead>
   {
-      listPayments
+      listNotas
       .map((e,index)=>
 
-        <tbody key={e.id}>
+        <tbody key={e.codInscricao}>
     
-    <tr key={e.id}>
-      <th scope="row">{e.id}</th>
-      <td>{e.dataPagamento}</td>
-    
+    <tr key={e.codInscricao}>
+      <th scope="row">{e.codInscricao}</th>
+      {/* <td>{e.codInscricao}</td> */}
+      <td>{e.inscData}</td>
+      <td>{e.nota1}</td>
+      <td>{e.nota2}</td>
+      <td>{e.faltas}</td>
+
    
 
           
-            <td>{ statePayment(e.status)}</td>
+            {/* <td>{ statePayment(e.status)}</td> */}
 
-                <td>{e.estudante.nome}</td>
+                {/* <td>{e.estudante.nome}</td> */}
                 {/* <td>{ statePaymentButton(e.status)}</td> */}
                 {/* <td><Link className="nav-link active" onClick={()=>onClickButton(e)} to="/register">Detalhes</Link></td> */}
-                <td>{e.status ==1 ? <button type="button" className="nav-link active" onClick={()=>onClickButton(e)} >Pagar</button>:<button type="button" className="nav-link active" onClick={()=>onClickButton(e)} >Detalhes</button>}</td>
+                {/* <td>{e.status ==1 ? <button type="button" className="nav-link active" onClick={()=>onClickButton(e)} >Pagar</button>:<button type="button" className="nav-link active" onClick={()=>onClickButton(e)} >Detalhes</button>}</td> */}
 
     </tr>
 
@@ -206,16 +208,16 @@ export const ReportPayment = props=> {
         </div>)
     } */}
 
-<div className="d-grid gap-2 col-6 mx-auto">
+{/* <div className="d-grid gap-2 col-6 mx-auto"> */}
 
 {/* <button type="submit" onClick={btnReport()} className="btn btn-outline-primary" >Imprimir</button> */}
-<Link className="btn btn-outline-primary" to="/iframeReport" target="_blank">Imprimir</Link>
+{/* <Link className="btn btn-outline-primary" to="/iframeReport" target="_blank">Imprimir</Link> */}
 {/* <iframe src="" width="200%" height="200%"></iframe> */}
 {/* <button type="submit" className="btn btn-outline-info" onClick={onSiginClick}>Registrar</button> */}
 
-</div>
+{/* </div> */}
     </div>
   );
 }
 
-export default ReportPayment;
+export default NotasScreen;

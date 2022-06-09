@@ -49,13 +49,16 @@ export const Home = props=> {
         <li className="nav-item">
           <Link className="nav-link active" to="/payments">Pagamentos</Link>
         </li>
-        <li className="nav-item">
+        {localStorage.getItem('perfilUtilizador') ==="ESTUDANTE" ?   "" :   <li className="nav-item">
         <Link className="nav-link active" to="/register">Cadastro</Link>
+        </li>} 
+        <li className="nav-item">
+        <Link className="nav-link active" to="/notas">Notas</Link>
         </li>
         <li className="nav-item">
         <Link className="nav-link active" to="/reportPayment">Relatorios</Link>
         </li>
-       
+      
       </ul>
       
       <span className="navbar-text">

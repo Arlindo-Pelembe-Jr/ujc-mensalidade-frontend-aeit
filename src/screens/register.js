@@ -160,6 +160,15 @@ http
 
 </div>
     <form className="d-grid gap-2 col-6 mx-auto" onSubmit={onSiginSubmit}>
+   <br/>
+    {/* <div class="col-md-4">
+        <label for="validationCustom01" class="form-label">Digite o nome do estudante</label>
+        <input type="text" class="form-control" id="validationCustom01"  required/>
+        <div class="valid-feedback">
+          Looks good!
+        </div>
+      </div> */}
+    
     <div className="mb-3">
     <label  className="form-label">Name</label>
     <input className="form-control" type="text"  aria-describedby="userNameHelp" onChange={setValues} name="name"/>

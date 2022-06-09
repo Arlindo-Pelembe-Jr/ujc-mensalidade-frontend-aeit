@@ -8,6 +8,7 @@ import { ListPayments } from '../src/screens/list_payments';
 import {StudentRegister } from '../src/screens/student_register';
 import {ReportPayment } from '../src/screens/payments_report';
 import {IframeReport } from '../src/screens/iframe_report';
+import {NotasScreen } from '../src/screens/notas';
 
 import './App.css';
 import './styles.css';
@@ -25,8 +26,10 @@ function App(){
     <Route path="/studentRegister" element={<StudentRegister/>}/>
     <Route path="/reportPayment" element={<ReportPayment/>}/>
     <Route path="/iframeReport" element={<IframeReport/>}/>
+    <Route path="/notas" element={<NotasScreen/>}/>
 
     {/* IframeReport */}
+    {/* NotasScreen */}
     <Route path="*" element={<ErrorPage/>}/>
 
     </Routes>
