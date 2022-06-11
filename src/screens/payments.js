@@ -67,6 +67,9 @@ export const Payments = () => {
             // console.log("status",response);
             console.log("send insert/post to core for insert payment");
             const currDate = new Date().toLocaleDateString();
+            if(state.mode != null && state.mode=="edit"){
+              
+            }
             switch (state.mode) {
               case "edit":
                 http
@@ -97,7 +100,7 @@ export const Payments = () => {
             });
                 break;
             
-              default:
+              case "pay":
                 http
             .post("http://localhost:8080/ujc-mensalidade/api/v1/pagamentos/mensalidade/"+userData.amount,
             {
@@ -122,6 +125,8 @@ export const Payments = () => {
               console.log(errorPayment);
             });
                 break;
+                default:
+                  break;
             }
         //     http
         //     .post("http://localhost:8080/ujc-mensalidade/api/v1/pagamentos/mensalidade/"+userData.amount,

@@ -14,6 +14,19 @@ export const Home = props=> {
 
     retrieveStudents();
   },[]);
+  let navigate=useNavigate();
+  const onClickButton = () => {
+    // alert("the payment object line"+payment.id +"--"+payment.status);
+    navigate("/payments",{state:{mode:"pay"}});
+    // switch(state) {
+
+    //   case 0:   return             ""          ;
+    //   case 1:   return  <Link className="nav-link active" to="#">Pagar</Link> ;
+    //   case 2: return  <Link className="nav-link active" to="#">Pagar</Link> ;
+
+    //   default:      return <td></td> 
+    // }
+  };
   const retrieveStudents = async ()=>{
     console.log("sync");
     const response= await http
@@ -46,9 +59,12 @@ export const Home = props=> {
         <li className="nav-item">
         <Link to="#" className="nav-link active" aria-current="page" >Home</Link>
         </li>
-        <li className="nav-item">
-          <Link className="nav-link active" to="/payments">Pagamentos</Link>
-        </li>
+        {localStorage.getItem('perfilUtilizador') ==="FUNCIONARIO" ? "":<li className="nav-item">
+
+<a type="button" className="nav-link active" onClick={()=>onClickButton()} >Pagamentos</a>
+    {/* <Link className="nav-link active" onClick={onClickButton()}>Pagamentos</Link> */}
+  </li>}
+        
         {localStorage.getItem('perfilUtilizador') ==="ESTUDANTE" ?   "" :   <li className="nav-item">
         <Link className="nav-link active" to="/register">Cadastro</Link>
         </li>} 

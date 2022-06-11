@@ -122,7 +122,7 @@ http
   };
 
   const getInitialRoleState = () => {
-    const valueRole = "";
+    const valueRole = "ESTUDANTE";
     return valueRole;
   };
 
@@ -232,7 +232,7 @@ http
     <br/>
 
       <select value={valueRole} onChange={handleChangeRole} name="perfil">
-      <option value="ADMIN">Administrador</option>
+      {/* <option value="ADMIN">Administrador</option> */}
                 <option value="ESTUDANTE">Estudante</option>
                 <option value="FUNCIONARIO">Funcionario</option>
      
